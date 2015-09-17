@@ -34,7 +34,7 @@ CPM_InitModule(${CPM_MODULE_NAME})
 # Caffe
 #------------------------------------------------------------------------------
 
-if(NOT DEFINED ${CAFFE_COMMIT})
+if(NOT DEFINED CAFFE_COMMIT)
     set(CAFFE_COMMIT "71e05876f644a08af4cb1c955d01c5a272539e96")
 endif()
 
@@ -59,7 +59,9 @@ if(NOT EXISTS ${CAFFE_ZIP} OR NOT EXISTS ${REPO_SOURCE_DIR})
     file(RENAME ${CAFFE_UNPACKED} ${REPO_SOURCE_DIR})
 endif()
 
-
+if(DEFINED CPU_ONLY)
+    CPM_ExportAdditionalDefinition("-DCPU_ONLY=${CPU_ONLY}")
+endif()
 
 add_subdirectory("${REPO_SOURCE_DIR}" "${REPO_BUILD_DIR}")
 get_target_property(CAFFE_INCLUDE_DIRECTORIES caffe "INCLUDE_DIRECTORIES")

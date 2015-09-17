@@ -9,7 +9,7 @@ mkdir -p ./bin
 set -e
 
 pushd ./bin > /dev/null
-  cmake -DBLAS=Open -DCPU_ONLY=1 ..
+  cmake -DBLAS=Open -DCPU_ONLY=ON ..
   make -j `nproc` test_caffe
   ./test_caffe
 popd
