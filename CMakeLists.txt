@@ -66,5 +66,6 @@ endif()
 add_subdirectory("${REPO_SOURCE_DIR}" "${REPO_BUILD_DIR}")
 get_target_property(CAFFE_INCLUDE_DIRECTORIES caffe "INCLUDE_DIRECTORIES")
 
+CPM_ForceOnlyOneModuleVersion()
 CPM_ExportAdditionalLibraryTarget("caffe")
 CPM_ExportAdditionalIncludeDir("${CAFFE_INCLUDE_DIRECTORIES}")
