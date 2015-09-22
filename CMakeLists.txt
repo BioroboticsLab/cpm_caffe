@@ -67,6 +67,7 @@ option(BUILD_SHARED_LIBS "BUILD_SHARED_LIBS" ON)
 option(BUILD_EXAMPLES "BUILD_EXAMPLES" OFF)
 
 add_subdirectory("${REPO_SOURCE_DIR}" "${REPO_BUILD_DIR}" EXCLUDE_FROM_ALL)
+set_target_properties(caffe PROPERTIES EXCLUDE_FROM_ALL FALSE)
 get_target_property(CAFFE_INCLUDE_DIRECTORIES caffe "INCLUDE_DIRECTORIES")
 
 CPM_ExportAdditionalLibraryTarget("caffe")
