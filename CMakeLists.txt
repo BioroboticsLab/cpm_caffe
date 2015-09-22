@@ -63,9 +63,11 @@ if(DEFINED CPU_ONLY)
     CPM_ExportAdditionalDefinition("-DCPU_ONLY=${CPU_ONLY}")
 endif()
 
-add_subdirectory("${REPO_SOURCE_DIR}" "${REPO_BUILD_DIR}")
+option(BUILD_SHARED_LIBS "BUILD_SHARED_LIBS" ON)
+option(BUILD_EXAMPLES "BUILD_EXAMPLES" OFF)
+
+add_subdirectory("${REPO_SOURCE_DIR}" "${REPO_BUILD_DIR}" EXCLUDE_FROM_ALL)
 get_target_property(CAFFE_INCLUDE_DIRECTORIES caffe "INCLUDE_DIRECTORIES")
 
-CPM_ForceOnlyOneModuleVersion()
 CPM_ExportAdditionalLibraryTarget("caffe")
 CPM_ExportAdditionalIncludeDir("${CAFFE_INCLUDE_DIRECTORIES}")
