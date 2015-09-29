@@ -38,7 +38,11 @@ if(NOT DEFINED CAFFE_COMMIT)
     set(CAFFE_COMMIT "71e05876f644a08af4cb1c955d01c5a272539e96")
 endif()
 
-set(CAFFE_URL "https://github.com/BVLC/caffe/archive/${CAFFE_COMMIT}.zip")
+if(NOT DEFINED CAFFE_GIT_REPO)
+    set(CAFFE_GIT_REPO "https://github.com/BVLC/caffe")
+endif()
+
+set(CAFFE_URL "${CAFFE_GIT_REPO}/archive/${CAFFE_COMMIT}.zip")
 
 set(CAFFE_ZIP "${CMAKE_BINARY_DIR}/3rdParty/caffe.zip")
 set(CAFFE_UNPACKED "${CMAKE_BINARY_DIR}/3rdParty/caffe-${CAFFE_COMMIT}")
@@ -47,7 +51,7 @@ set(REPO_SOURCE_DIR "${CMAKE_BINARY_DIR}/3rdParty/caffe")
 set(REPO_BUILD_DIR "${CMAKE_BINARY_DIR}/3rdParty/caffe_build")
 if(NOT EXISTS ${CAFFE_ZIP} OR NOT EXISTS ${REPO_SOURCE_DIR})
     message(${CAFFE_COMMIT})
-    message("Downloading Caffe ${CAFFE_COMMIT}")
+    message("Downloading Caffe from ${CAFFE_URL}")
     file(DOWNLOAD ${CAFFE_URL} ${CAFFE_ZIP} SHOW_PROGRESS)
     execute_process(
         COMMAND ${CMAKE_COMMAND} -E tar -xf ${CAFFE_ZIP}
