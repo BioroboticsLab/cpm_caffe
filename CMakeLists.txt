@@ -64,7 +64,7 @@ if(NOT EXISTS ${CAFFE_ZIP} OR NOT EXISTS ${REPO_SOURCE_DIR})
 endif()
 
 if(DEFINED CPU_ONLY)
-    CPM_ExportAdditionalDefinition("-DCPU_ONLY=${CPU_ONLY}")
+    CPM_ExportAdditionalDefinition("-DCPU_ONLY")
 endif()
 
 option(BUILD_SHARED_LIBS "BUILD_SHARED_LIBS" ON)
