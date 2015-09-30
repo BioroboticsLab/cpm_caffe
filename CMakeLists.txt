@@ -44,18 +44,18 @@ endif()
 
 set(CAFFE_URL "${CAFFE_GIT_REPO}/archive/${CAFFE_COMMIT}.zip")
 
-set(CAFFE_ZIP "${CMAKE_BINARY_DIR}/3rdParty/caffe.zip")
-set(CAFFE_UNPACKED "${CMAKE_BINARY_DIR}/3rdParty/caffe-${CAFFE_COMMIT}")
+set(CAFFE_ZIP "${CMAKE_CURRENT_BINARY_DIR}/3rdParty/caffe.zip")
+set(CAFFE_UNPACKED "${CMAKE_CURRENT_BINARY_DIR}/3rdParty/caffe-${CAFFE_COMMIT}")
 
-set(REPO_SOURCE_DIR "${CMAKE_BINARY_DIR}/3rdParty/caffe")
-set(REPO_BUILD_DIR "${CMAKE_BINARY_DIR}/3rdParty/caffe_build")
+set(REPO_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/3rdParty/caffe")
+set(REPO_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/3rdParty/caffe_build")
 if(NOT EXISTS ${CAFFE_ZIP} OR NOT EXISTS ${REPO_SOURCE_DIR})
     message(${CAFFE_COMMIT})
     message("Downloading Caffe from ${CAFFE_URL}")
     file(DOWNLOAD ${CAFFE_URL} ${CAFFE_ZIP} SHOW_PROGRESS)
     execute_process(
         COMMAND ${CMAKE_COMMAND} -E tar -xf ${CAFFE_ZIP}
-        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/3rdParty/"
+        WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/3rdParty/"
         RESULT_VARIABLE error_code)
     if(error_code)
         message(FATAL_ERROR "Failed to unpack Caffe")
@@ -67,10 +67,10 @@ if(DEFINED CPU_ONLY)
     CPM_ExportAdditionalDefinition("-DCPU_ONLY")
 endif()
 
-option(BUILD_SHARED_LIBS "BUILD_SHARED_LIBS" ON)
-option(BUILD_EXAMPLES "BUILD_EXAMPLES" OFF)
+set(BUILD_SHARED_LIBS "BUILD_SHARED_LIBS" ON)
+set(BUILD_EXAMPLES "BUILD_EXAMPLES" OFF)
 
-add_subdirectory("${REPO_SOURCE_DIR}" "${REPO_BUILD_DIR}" EXCLUDE_FROM_ALL)
+add_subdirectory("${REPO_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}" EXCLUDE_FROM_ALL)
 set_target_properties(caffe PROPERTIES EXCLUDE_FROM_ALL FALSE)
 get_target_property(CAFFE_INCLUDE_DIRECTORIES caffe "INCLUDE_DIRECTORIES")
 
