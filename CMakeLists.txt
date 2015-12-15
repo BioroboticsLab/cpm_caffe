@@ -68,13 +68,17 @@ if(DEFINED CPU_ONLY)
 endif()
 
 if(NOT DEFINED BUILD_SHARED_LIBS)
-    set(BUILD_SHARED_LIBS "BUILD_SHARED_LIBS" ON)
+    set(BUILD_SHARED_LIBS ON)
 endif()
-set(BUILD_EXAMPLES "BUILD_EXAMPLES" OFF)
+set(BUILD_EXAMPLES OFF)
 
 add_subdirectory("${REPO_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}" EXCLUDE_FROM_ALL)
 set_target_properties(caffe PROPERTIES EXCLUDE_FROM_ALL FALSE)
 get_target_property(CAFFE_INCLUDE_DIRECTORIES caffe "INCLUDE_DIRECTORIES")
 
-CPM_ExportAdditionalLibraryTarget("caffe")
+get_directory_property(Caffe_LINK
+    DIRECTORY ${REPO_SOURCE_DIR}
+    DEFINITION Caffe_LINK)
+
+CPM_ExportAdditionalLibraryTarget(${Caffe_LINK})
 CPM_ExportAdditionalIncludeDir("${CAFFE_INCLUDE_DIRECTORIES}")
