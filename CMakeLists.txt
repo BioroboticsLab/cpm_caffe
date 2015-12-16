@@ -35,7 +35,7 @@ CPM_InitModule(${CPM_MODULE_NAME})
 #------------------------------------------------------------------------------
 
 if(NOT DEFINED CAFFE_COMMIT)
-    set(CAFFE_COMMIT "71e05876f644a08af4cb1c955d01c5a272539e96")
+    set(CAFFE_COMMIT "79539180edc73d3716149fb28e07c67a45896be1")
 endif()
 
 if(NOT DEFINED CAFFE_GIT_REPO)
