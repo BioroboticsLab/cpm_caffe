@@ -48,7 +48,7 @@ set(CAFFE_ZIP "${CMAKE_CURRENT_BINARY_DIR}/3rdParty/caffe.zip")
 set(CAFFE_UNPACKED "${CMAKE_CURRENT_BINARY_DIR}/3rdParty/caffe-${CAFFE_COMMIT}")
 
 set(REPO_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/3rdParty/caffe")
-set(REPO_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/3rdParty/caffe_build")
+set(REPO_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/")
 if(NOT EXISTS ${CAFFE_ZIP} OR NOT EXISTS ${REPO_SOURCE_DIR})
     message(${CAFFE_COMMIT})
     message("Downloading Caffe from ${CAFFE_URL}")
@@ -81,4 +81,5 @@ get_directory_property(Caffe_LINK
     DEFINITION Caffe_LINK)
 
 CPM_ExportAdditionalLibraryTarget(${Caffe_LINK})
+CPM_ExportAdditionalIncludeDir("${PROJECT_BINARY_DIR}")
 CPM_ExportAdditionalIncludeDir("${CAFFE_INCLUDE_DIRECTORIES}")
