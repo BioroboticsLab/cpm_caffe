@@ -67,9 +67,6 @@ if(DEFINED CPU_ONLY)
     CPM_ExportAdditionalDefinition("-DCPU_ONLY")
 endif()
 
-if(NOT DEFINED BUILD_SHARED_LIBS)
-    set(BUILD_SHARED_LIBS ON)
-endif()
 set(BUILD_EXAMPLES OFF)
 
 add_subdirectory("${REPO_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}" EXCLUDE_FROM_ALL)
